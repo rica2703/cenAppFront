@@ -1,0 +1,13 @@
+.inputHeader{
+    background-color: white;
+    background-image: url('../../../assets/buscador.png');
+    background-repeat: no-repeat;
+    /* background-size: 10%; */
+    background-position-x: 90%;
+    background-position-y: center;
+}
+.inputAlerta{
+    background-color: rgba(0, 0, 0, 0.134);
+    color: black;
+
+}
