@@ -1,4 +1,5 @@
-import ejemplo from '../../assets/esp32.jpg';
+import ejemplo from '../../assets/asada.png';
+import ejemplo2 from '../../assets/chorizo.png';
 const datos=[
 {
     imagen:ejemplo,
@@ -6,7 +7,7 @@ const datos=[
     precio:"$200",
 },
 {
-    imagen:ejemplo,
+    imagen:ejemplo2,
     nombre:"pastor",
     precio:"$12",
 },
@@ -16,7 +17,7 @@ const datos=[
     precio:"$233",
 },
 {
-    imagen:ejemplo,
+    imagen:ejemplo2,
     nombre:"Quesadilla",
     precio:"$444",
 },
