@@ -12,6 +12,7 @@ function Menu (){
   const navigate=useNavigate();
   const[pedir,setPedir]=useState(false);
   const [opcionesMenu,setOpcionesMenu]=useState(false);
+  const [textosData, setTextosData] = useState(["Mi Cuenta"]);
   const handlerClick=(imagen,nombre,precio)=>{
     setPedir(true);
   }
@@ -19,7 +20,7 @@ function Menu (){
   return (
     <>
     <Header onClick={()=>setOpcionesMenu(true)}/>
-    {opcionesMenu&&(<MenuOpciones texto="Mi cuenta" onClickOpcion1={()=>handlerClickMiCuenta()} onClickBoton={()=>setOpcionesMenu(false)}/>)}
+    {opcionesMenu&&(<MenuOpciones textosData={textosData} onClickBotonMap={()=>handlerClickMiCuenta()} onClickBoton={()=>setOpcionesMenu(false)}/>)}
     {datos.map((data,key)=>(<CardProducto onClick={()=>handlerClick(data.imagen,data.nombre,data.precio)} imagenAlimento={data.imagen} nombreAlimento={data.nombre} precioAlimento={data.precio}/>))}
     {pedir&&(<Alerta onClickBoton={()=>setPedir(false)}/>)}
     </>

@@ -10,6 +10,7 @@ import asada from '../../assets/asada.png';
 import chorizo from '../../assets/chorizo.png';
 function MiCuenta() {
     const [opcionesMenu, setOpcionesMenu] = useState(false);
+  const [textosData, setTextosData] = useState(["Seguir ordenando"]);
     const navigate = useNavigate();
     const handlerClickOrdenar = () => {
         navigate('/ordenar');
@@ -37,7 +38,7 @@ function MiCuenta() {
     return (
         <>
             <Header onClick={() => setOpcionesMenu(true)} />
-            {opcionesMenu && (<MenuOpciones texto="Seguir ordenando" onClickOpcion1={() => handlerClickOrdenar()} onClickBoton={() => setOpcionesMenu(false)} />)}
+            {opcionesMenu && (<MenuOpciones textosData={textosData} onClickBotonMap={() => handlerClickOrdenar()} onClickBoton={() => setOpcionesMenu(false)} />)}
             <section className='seccionMiCuenta'>
                 <div className='contenedorMiCuenta'>
                     {alimento.map((dato, key) => (

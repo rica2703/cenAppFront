@@ -5,6 +5,8 @@ import Login from './pages/login/login';
 import CrearCuenta from './pages/CrearCuenta/crearCuenta';
 import Menu from './pages/menu/menu.jsx';
 import MiCuenta from './pages/miCuenta/miCuenta.jsx';
+import AceptarPedidos from './pages/AceptarPedidos/AceptarPedidos.jsx';
+import HistorialVentas from './pages/HistorialVentas/historialVentas.jsx';
 import {
     createBrowserRouter,
     RouterProvider,
@@ -25,6 +27,14 @@ import {
     {
       path:"/mi-cuenta",
       element:<MiCuenta/>,
+    },
+    {
+      path:"/aceptar-pedidos",
+      element:<AceptarPedidos/>,
+    },
+    {
+      path:"/historial-Ventas",
+      element:<HistorialVentas/>
     },
     ])
 function App() {

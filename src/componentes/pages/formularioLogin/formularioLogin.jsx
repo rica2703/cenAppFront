@@ -10,6 +10,9 @@ const navigate=useNavigate();
     const handlerClick=()=>{
         navigate("/crearCuenta");
     }
+    const handlerClickIniciarSesion=()=>{
+        navigate("/aceptar-pedidos");
+    }
     return (
         <>
             <form action="" className="formulario">
@@ -17,7 +20,7 @@ const navigate=useNavigate();
                 <Titulo textoH1="CenApp" className="titulo"/>
                 <Input placeholder="Usuario" type="text"/>
                 <Input placeholder="Contraseña" type="password"/>
-                <Boton  textoBoton="Iniciar sesión"/>
+                <Boton onClick={()=>handlerClickIniciarSesion()} textoBoton="Iniciar sesión"/>
                 <Link onClick={()=>handlerClick()} textoA="Crear Cuenta"/>
             </form>
         </>

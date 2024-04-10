@@ -1,0 +1,27 @@
+.contenedorTextosAceptarPedidos{
+    background-color: rgba(218, 218, 218, 0.59);
+    margin-top: 3%;
+    width: 75%;
+   border-radius: 10px;
+}
+.textosPedidosAceptar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3%;
+}
+.contenedorPadreAceptarPedidos{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+    /* height: 100vh; */
+}
+.contenedorBotonesPedidos{
+    display: flex;
+    margin: 5%;
+}
+.contenedorBotonesPedidos button{
+    margin: 1%;
+}
