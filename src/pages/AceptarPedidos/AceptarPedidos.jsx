@@ -6,7 +6,7 @@ import CardAcPedido from '../../componentes/pages/cardAceptarPedido/cardAcPedido
 import { useNavigate } from 'react-router';
 function AceptarPedidos (){
     const [opcionesMenu, setOpcionesMenu] = useState(false);
-    const [textosData, setTextosData] = useState(["Historial de venta", "Aceptar pedidos"]);
+    const [textosData, setTextosData] = useState(["Historial de venta", "Aceptar pedidos","Crear producto"]);
     const navigate=useNavigate();
     // const [textosPData,setTextosPData]=useState(["1 taco al pastor","2 taco asada","5 tacos chistorra","subtotal: $80","total:$100"]);
     const textosPData = JSON.stringify([

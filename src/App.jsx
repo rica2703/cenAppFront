@@ -7,6 +7,7 @@ import Menu from './pages/menu/menu.jsx';
 import MiCuenta from './pages/miCuenta/miCuenta.jsx';
 import AceptarPedidos from './pages/AceptarPedidos/AceptarPedidos.jsx';
 import HistorialVentas from './pages/HistorialVentas/historialVentas.jsx';
+import CrearProducto from './pages/crearProducto/crearProducto.jsx';
 import {
     createBrowserRouter,
     RouterProvider,
@@ -35,6 +36,10 @@ import {
     {
       path:"/historial-Ventas",
       element:<HistorialVentas/>
+    },
+    {
+      path:"/crear-producto",
+      element:<CrearProducto/>
     },
     ])
 function App() {

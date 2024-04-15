@@ -22,7 +22,7 @@ function Menu (){
     <Header onClick={()=>setOpcionesMenu(true)}/>
     {opcionesMenu&&(<MenuOpciones textosData={textosData} onClickBotonMap={()=>handlerClickMiCuenta()} onClickBoton={()=>setOpcionesMenu(false)}/>)}
     {datos.map((data,key)=>(<CardProducto onClick={()=>handlerClick(data.imagen,data.nombre,data.precio)} imagenAlimento={data.imagen} nombreAlimento={data.nombre} precioAlimento={data.precio}/>))}
-    {pedir&&(<Alerta onClickBoton={()=>setPedir(false)}/>)}
+    {pedir&&(<Alerta textoBotonAlerta="agregar" textoAlerta="Ingresa la cantidad" onClickBoton={()=>setPedir(false)}/>)}
     </>
   );};
 export default Menu;

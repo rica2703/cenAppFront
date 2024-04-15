@@ -2,7 +2,7 @@ import './input.css';
 function Input(props){
     return(
         <>
-        <input type={props.type} onBlur={props.onBlur} className={props.className} placeholder={props.placeholder} id="" />
+        <input type={props.type} onChange={props.onChange} onBlur={props.onBlur} className={props.className} name={props.name} placeholder={props.placeholder} value={props.value} id="" />
         </>
     );
 }
