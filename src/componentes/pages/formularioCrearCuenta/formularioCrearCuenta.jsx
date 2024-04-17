@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 function FormCrearCuenta() {
     const [token, setToken] = useState("");
     const [nombre, setNombre] = useState("");
-    // const [apellidos, setApellidos] = useState("");
+    const [apellidos, setApellidos] = useState("");
     const [nombreUsuario, setNombreUsuario] = useState("");
     const [rol, setRol] = useState("");
     const [correo, setCorreo] = useState("");
@@ -43,9 +43,11 @@ function FormCrearCuenta() {
                 password: contraseña,
                 roles:["admin"],
                 nombre: nombre,
-                // Apellidos: apellidos
+                Apellidos: apellidos
             })
         };
+        // fetch('http://44.221.145.222/api/auth/signup',requestOption)
+        
         fetch('http://localhost:8080/api/auth/signup',requestOption)
         .then(response=>{
             if(response.ok){
@@ -87,7 +89,7 @@ function FormCrearCuenta() {
                 <img src={Logo} alt="" className="Logo" />
                 <Titulo textoH1="CenApp" className="titulo" />
                 <Input onChange={(e) => setNombre(e.target.value)} placeholder="Nombre completo" type="text" />
-                {/* <Input onChange={(e) => setApellidos(e.target.value)} placeholder="Apellidos" type="text" /> */}
+                <Input onChange={(e) => setApellidos(e.target.value)} placeholder="Apellidos" type="text" />
                 <Input onChange={(e) => setNombreUsuario(e.target.value)} placeholder="Nombre de usuario" type="text" />
                 <Input onChange={(e) => setRol(e.target.value)} placeholder="Rol" />
                 <Input onChange={(e) => setCorreo(e.target.value)} placeholder="Correo" />

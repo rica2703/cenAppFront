@@ -8,7 +8,7 @@ function Alerta (props){
     <div className='divAlerta'>
         <div className='alertaCuadro'>
         <h2>{props.textoAlerta}</h2>
-        <Input type="number" className="inputAlerta" placeholder="0"/>
+        <Input type="number" onChange={props.onChange} className="inputAlerta" placeholder="0"/>
         <Boton onClick={props.onClickBoton} className="botonAlerta" textoBoton={props.textoBotonAlerta}/>
         </div>
     </div>

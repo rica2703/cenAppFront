@@ -1,32 +1,40 @@
 import React, { useState } from 'react';
-import Header from '../../componentes/pages/header/header';
 import { useNavigate } from 'react-router';
+import Header from '../../componentes/pages/header/header';
 import MenuOpciones from '../../componentes/pages/menuOpciones/menuOpciones';
 import Input from '../../componentes/ui/input/input';
 import Boton from '../../componentes/ui/boton/boton';
 import './crearProducto.css';
+import imagen1 from '../../assets/asada.png'; // Importa tus imágenes predefinidas
+import imagen2 from '../../assets/chorizo.png';
+import imagen3 from '../../assets/carnitas.png';
+import MensajeAlerta from '../../componentes/pages/alerta/mensajeAlerta.jsx';
 import { useEffect } from 'react';
-import MensajeAlerta from '../../componentes/pages/alerta/mensajeAlerta';
 function CrearProducto() {
   const navigate = useNavigate();
   const [opcionesMenu, setOpcionesMenu] = useState(false);
-  const [textosData, setTextosData] = useState(["Historial de venta", "Aceptar pedidos","Crear cuenta","cerrar sesion","Crear producto"]);
+  const [textosData, setTextosData] = useState(["Historial de venta", "Aceptar pedidos","Crear cuenta","Cerrar sesión","Crear producto"]);
   const [nombreProducto, setNombreProducto] = useState("");
-  const [precioProducto, setPrecioProducto] = useState(0);
-  const [imagenProducto, setImagenProducto] = useState("");
+  const [precioProducto, setPrecioProducto] = useState("");
+  const [imagenProducto, setImagenProducto] = useState(""); // Almacena el nombre de la imagen seleccionada
   const [estadoProducto, setEstadoProducto] = useState("");
   const [token, setToken] = useState("");
-  const [mensajeAlerta,setMensaje]=useState("");
-  const [mostrarMensaje,setMostrarMensaje]=useState(false);
-
+  const [mensajeAlerta, setMensajeAlerta] = useState("");
+  const [mostrarMensaje, setMostrarMensaje] = useState(false);
+  const [imagenSeleccionada,setImagenSeleccionada]=useState(null);
+  useEffect(() => {
+    const tokenFromStorage=localStorage.getItem('token');
+    setToken(tokenFromStorage);
+    },[]);
   const handlerClickAdios = () => {
     setOpcionesMenu(false);
   }
-  const cerrarSesion=()=>{
-    localStorage.setItem('token',null);
-    // localStorage.setItem('token', token);
+
+  const cerrarSesion = () => {
+    localStorage.setItem('token', null);
     navigate("/");
   }
+
   const handlerClickUno = () => {
     navigate("/historial-Ventas");
   }
@@ -34,60 +42,55 @@ function CrearProducto() {
   const handlerClickDos = () => {
     navigate("/aceptar-pedidos");
   }
-  const handlerClickCrearCuenta=()=>{
+
+  const handlerClickCrearCuenta = () => {
     navigate("/crearcuenta");
   }
-  useEffect(() => {
-    // Obtener el token del localStorage al cargar el componente
-    const tokenFromStorage = localStorage.getItem('token');
-    setToken(tokenFromStorage);
-  }, []); // Se ejecuta solo una vez al montar el componente
-    // Token de inicio de sesión
-    const handlerClickEnviar = () => {
-        // Validar campos
-        if (!nombreProducto || !precioProducto || !imagenProducto || !estadoProducto) {
-            // alert("Por favor completa todos los campos.");
-            setMensaje("Por favor complete todos los campos");
-          setMostrarMensaje(true);
-            return;
-        }
-        // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTc4Yzg3ZDhiOTZhYWE5OWUyMzRmMiIsImlhdCI6MTcxMzEzNTU3OSwiZXhwIjoxNzEzMjIxOTc5fQ.9-lPCNWZCQjfszYSl6-bHxTAno2IF1dBtMjlQxIEVkM'; // Reemplaza 'tu_token_aqui' por tu token real
 
-      
-    // Crear el objeto de configuración para la solicitud fetch
+  const handlerClickEnviar = () => {
+    if (!nombreProducto || !precioProducto || !imagenSeleccionada || !estadoProducto) {
+      setMensajeAlerta("Por favor complete todos los campos");
+      setMostrarMensaje(true);
+      return;
+    }
+
     const requestOptions = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // 'x-access-token': `Bearer ${token}`
-        'x-access-token': token // Agregar el token en el encabezado Authorization
+        'x-access-token': token
       },
       body: JSON.stringify({
         nombre: nombreProducto,
         precio: precioProducto,
-        imagen: imagenProducto,
+        imagen: imagenSeleccionada, // Envia el nombre de la imagen seleccionada
         estado: estadoProducto
       })
     };
 
-    // Realizar la solicitud POST al backend
-    // fetch(`http://44.221.145.222/api/auth/crearproducto`, requestOptions)
-    
     fetch('http://localhost:8080/api/auth/crearproducto', requestOptions)
-    .then(response => {
-      if (response.ok) {
-          // alert("funciona hasta aqui");
+      .then(response => {
+        if (response.ok) {
+          setMensajeAlerta("Producto creado exitosamente");
+          setMostrarMensaje(true);
+          setNombreProducto("");
+        setPrecioProducto("");
+        setEstadoProducto("");
+        setImagenProducto("");
           return response.json();
         } else {
-          setMensaje("Error al crear el producto");
+          setMensajeAlerta("Error al crear el producto");
           setMostrarMensaje(true);
           throw new Error('Error al crear el producto.');
         }
       })
       .then(data => {
         console.log('Producto creado exitosamente:', data);
-        setMensaje("Producto creado exitosamente");
-        setMostrarMensaje(true);
+        setNombreProducto("");
+        setPrecioProducto("");
+        setEstadoProducto("");
+        // setImagenProducto("");
+        setImagenSeleccionada(null);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -101,7 +104,12 @@ function CrearProducto() {
       <section className='seccionCrearProducto'>
         <Input value={nombreProducto} onChange={(e) => setNombreProducto(e.target.value)} placeholder="Nombre del producto" type="text" />
         <Input value={precioProducto} onChange={(e) => setPrecioProducto(e.target.value)} placeholder="Precio" type="number" />
-        <Input value={imagenProducto} onChange={(e) => setImagenProducto(e.target.value)} placeholder="Imagen" type="text" />
+          <p>Elige la imagen para el producto</p>
+        <div className='imagenesPredefinidas'>
+          <img src={imagen1} alt="Imagen 1" onClick={() => setImagenSeleccionada("asada")} className={imagenSeleccionada === "asada" ? "imagenSeleccionada" : ""} />
+          <img src={imagen2} alt="Imagen 2" onClick={() => setImagenSeleccionada("chorizo")} className={imagenSeleccionada === "chorizo" ? "imagenSeleccionada" : ""} />
+          <img src={imagen3} alt="Imagen 3" onClick={() => setImagenSeleccionada("carnitas")} className={imagenSeleccionada === "carnitas" ? "imagenSeleccionada" : ""} />
+        </div>
         <div className='checkboxDiv'>
           <div className='checkboxDiv'>
             <p>Activo</p>
@@ -114,7 +122,7 @@ function CrearProducto() {
         </div>
         <Boton onClick={handlerClickEnviar} textoBoton="Crear Producto" className="botonEnviarProducto" />
       </section>
-      {mostrarMensaje&&(<MensajeAlerta onClickBoton={()=>setMostrarMensaje(false)} textoBotonAlerta="ok" textoAlerta={mensajeAlerta}/>)}
+      {mostrarMensaje && (<MensajeAlerta onClickBoton={() => setMostrarMensaje(false)} textoBotonAlerta="ok" textoAlerta={mensajeAlerta} />)}
     </>
   );
 };

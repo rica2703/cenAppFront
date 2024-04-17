@@ -35,7 +35,7 @@ const [Mensaje,setMensaje]=useState("");
               password:contraseña,
             })
           };
-          fetch('http://localhost:8080/api/auth/signin', requestOptions)
+          fetch('http://lcocalhost:8080/api/auth/signin', requestOptions)
     .then(response => {
       if (response.ok) {
         //   alert("funciona hasta aqui");
@@ -47,9 +47,9 @@ const [Mensaje,setMensaje]=useState("");
           throw new Error('Usuario o contraseña invalida');
         }
         else if(response.status===404){
-            setMensaje("Usuario Inexistente");
+            setMensaje("Usuario Inexistente o contraseña incorrecta");
             setMostrarMensaje(true);
-            throw new Error('Usuario inexistente');
+            throw new Error('Usuario inexistente o contraseña incorrecta');
         }
       })
       .then(data => {
@@ -60,7 +60,7 @@ const [Mensaje,setMensaje]=useState("");
         navigate("/crear-producto");
       })
       .catch(error => {
-        setMensaje("Usuario Inexistente");
+        setMensaje("Usuario Inexistente o contraseña incorrecta");
         setMostrarMensaje(true);
         console.error('Error:', error);
       })
