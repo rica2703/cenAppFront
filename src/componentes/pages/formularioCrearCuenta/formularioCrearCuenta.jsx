@@ -68,7 +68,8 @@ function FormCrearCuenta() {
         .then(data=>{
             setMensajeAlerta("Cuenta creada con exito");
             setMostrarAlerta(true);
-            navigate("/");
+            navigate("/"); 
+            //navegar
         })
         .catch(error=>{
             if(response.status===400){
